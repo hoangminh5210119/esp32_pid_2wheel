@@ -5,7 +5,7 @@
 #include <PID_v1.h>
 
 // ================= WIFI ==========================
-const char *ssid = "Mshop";
+const char *ssid = "ESP32_Balance_Bot";
 const char *password = "0354545185";
 WebServer server(80);
 
@@ -811,15 +811,18 @@ void setup() {
   pinMode(IN3, OUTPUT);
   pinMode(IN4, OUTPUT);
 
-  WiFi.begin(ssid, password);
-  Serial.print("Connecting to WiFi");
-  while (WiFi.status() != WL_CONNECTED) {
-    Serial.print(".");
-    delay(250);
-  }
-  Serial.println("\nWiFi Connected!");
-  Serial.print("IP Address: ");
-  Serial.println(WiFi.localIP());
+  // WiFi.begin(ssid, password);
+  // Serial.print("Connecting to WiFi");
+  // while (WiFi.status() != WL_CONNECTED) {
+  //   Serial.print(".");
+  //   delay(250);
+  // }
+  // Serial.println("\nWiFi Connected!");
+  // Serial.print("IP Address: ");
+  // Serial.println(WiFi.localIP());
+
+  // start Access Point
+  WiFi.softAP(ssid);
 
   server.on("/", []() { server.send(200, "text/html", htmlPage()); });
   server.on("/pid", handlePID);
